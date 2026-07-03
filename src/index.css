@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ *
+ * SpinQueue design tokens
+ * A nightlife identity: near-black surfaces, fuchsia → violet glow.
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Fuchsia — primary accent */
+  --color-neon-50: #fdf4ff;
+  --color-neon-100: #fae8ff;
+  --color-neon-200: #f5d0fe;
+  --color-neon-300: #f0abfc;
+  --color-neon-400: #e879f9;
+  --color-neon-500: #d946ef;
+  --color-neon-600: #c026d3;
+  --color-neon-700: #a21caf;
+  --color-neon-800: #86198f;
+  --color-neon-900: #701a75;
+
+  /* Violet — gradient partner */
+  --color-grape-400: #a78bfa;
+  --color-grape-500: #8b5cf6;
+  --color-grape-600: #7c3aed;
+  --color-grape-700: #6d28d9;
+
+  /* Surfaces — near-black with a violet tint */
+  --color-surface-950: #08060f;
+  --color-surface-900: #0f0b1a;
+  --color-surface-850: #150f24;
+  --color-surface-800: #1c142f;
+  --color-surface-700: #2a1f45;
+  --color-surface-600: #3c2d60;
+  --color-surface-500: #574079;
+
+  /* Muted text ramp on dark */
+  --color-haze-100: #ece7f5;
+  --color-haze-200: #c9bfe0;
+  --color-haze-300: #a394c4;
+  --color-haze-400: #7d6ba0;
+
+  --shadow-glow: 0 0 0 1px rgb(217 70 239 / 0.3), 0 16px 50px -12px rgb(217 70 239 / 0.45);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-surface-950 font-sans text-haze-100 antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl
+      px-4 py-2.5 text-sm font-semibold transition-all duration-150 outline-none
+      focus-visible:ring-2 focus-visible:ring-neon-500/60 disabled:cursor-not-allowed
+      disabled:opacity-50 active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-neon-500 to-grape-500 text-white shadow-lg
+      shadow-neon-500/25 hover:from-neon-400 hover:to-grape-400;
+  }
+  .btn-glass {
+    @apply border border-white/10 bg-white/5 text-haze-100 backdrop-blur hover:bg-white/10;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-haze-300 hover:bg-white/5 hover:text-white;
+  }
+  .btn-danger {
+    @apply bg-red-500/90 text-white hover:bg-red-500;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  .card {
+    @apply rounded-2xl border border-white/8 bg-surface-900/80 backdrop-blur;
+  }
+  .card-glow {
+    @apply rounded-2xl border border-neon-500/20 bg-surface-850;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-surface-850 px-3.5 py-2.5
+      text-sm text-white placeholder-haze-400 transition-colors outline-none
+      focus:border-neon-500/60 focus:ring-2 focus:ring-neon-500/20;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-haze-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-neon-400 to-grape-400 bg-clip-text text-transparent;
+  }
+  .grid-glow {
+    background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.05) 1px, transparent 0);
+    background-size: 30px 30px;
+  }
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+}
